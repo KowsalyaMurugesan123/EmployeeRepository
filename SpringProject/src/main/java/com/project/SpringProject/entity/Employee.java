@@ -2,9 +2,11 @@ package com.project.SpringProject.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "Employee")
@@ -12,64 +14,69 @@ import lombok.NoArgsConstructor;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "employeeid", length = 50)
-    private int employeeid;
-    @Column(name = "employeename", length = 50)
-    private String employeename;
-    @Column(name = "mobilenumber", length = 12)
-    private String mobilenumber;
-    @Column(name = "mailid", length = 50)
-    private String mailid;
-    @Column(name = "age", length = 2)
-    private int age;
-    @Column(name = "salary", length = 10)
-    private int salary;
-    @Column(name = "pfnumber", length = 50)
-    private int pfnumber;
+    @Column(name = "employee_Id")
+    private int employeeId;
+    @Column(name = "employee_Name")
+    private String employeeName;
+    @Column(name = "mobile_Number")
 
-    public Employee(int employeeid, String employeename, String mobilenumber, String mailid, int age, int salary, int pfnumber) {
-        this.employeeid = employeeid;
-        this.employeename = employeename;
-        this.mobilenumber = mobilenumber;
-        this.mailid = mailid;
+    private String mobileNumber;
+    @Column(name = "mail_Id")
+
+    private String mailId;
+    @Column(name = "age")
+
+    private int age;
+    @Column(name = "salary")
+
+    private int salary;
+    @Column(name = "pf_Number")
+
+    private int pfNumber;
+
+    public Employee(int employeeId, String employeeName, String mobileNumber, String mailId, int age, int salary, int pfNumber) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.mobileNumber = mobileNumber;
+        this.mailId = mailId;
         this.age = age;
         this.salary = salary;
-        this.pfnumber = pfnumber;
+        this.pfNumber = pfNumber;
     }
 
     public Employee() {
     }
 
-    public int getEmployeeid() {
-        return employeeid;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployeeid(int employeeid) {
-        this.employeeid = employeeid;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String getEmployeename() {
-        return employeename;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setEmployeename(String employeename) {
-        this.employeename = employeename;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
-    public String getMobilenumber() {
-        return mobilenumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setMobilenumber(String mobilenumber) {
-        this.mobilenumber = mobilenumber;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
-    public String getMailid() {
-        return mailid;
+    public String getMailId() {
+        return mailId;
     }
 
-    public void setMailid(String mailid) {
-        this.mailid = mailid;
+    public void setMailId(String mailId) {
+        this.mailId = mailId;
     }
 
     public int getAge() {
@@ -88,11 +95,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public int getPfnumber() {
-        return pfnumber;
+    public int getPfNumber() {
+        return pfNumber;
     }
 
-    public void setPfnumber(int pfnumber) {
-        this.pfnumber = pfnumber;
+    public void setPfNumber(int pfNumber) {
+        this.pfNumber = pfNumber;
     }
 }

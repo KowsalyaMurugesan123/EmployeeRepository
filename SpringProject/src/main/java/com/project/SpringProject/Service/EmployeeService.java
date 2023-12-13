@@ -10,13 +10,14 @@ import java.util.List;
 public interface EmployeeService {
 
 
-     EmployeeDto addEmployee(EmployeeDto employeeDto);
+    public EmployeeDto addEmployee(EmployeeDto employeeDto);
 
-     void deleteEmployee(int id);
-     EmployeeDto updateEmployee(int id, EmployeeDto updateRequest);
+    public void deleteEmployee(int id);
+    public EmployeeDto updateEmployee(int id, EmployeeDto updateRequest);
      List<EmployeeDto> getAllEmployee();
-   EmployeeDto getEmployeeid(int id);
-    Page findPaginated(int pageno, int pagesize);
+     public EmployeeDto getEmployeeid(int id);
+
+     public Page<EmployeeDto> getAllEmployee(int pageNo, int pageSize,String sortBy, String sorting);
 
 
 

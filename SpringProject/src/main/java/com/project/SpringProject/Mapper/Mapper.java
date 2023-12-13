@@ -7,28 +7,29 @@ import com.project.SpringProject.entity.Employee;
 public class Mapper {
     public static EmployeeDto mapToEmployeeDTO(Employee employee){
       EmployeeDto employeeDto = new EmployeeDto(
-              employee.getEmployeeid(),
-              employee.getEmployeename(),
-              employee.getMobilenumber(),
-              employee.getMailid(),
+              employee.getEmployeeId(),
+              employee.getEmployeeName(),
+              employee.getMobileNumber(),
+              employee.getMailId(),
               employee.getAge(),
               employee.getSalary(),
-              employee.getPfnumber()
+              employee.getPfNumber()
       );
         return employeeDto;
     }
     public static Employee mapToEmployee(EmployeeDto employeeDto){
         Employee employee = new Employee(
-        employeeDto.getEmployeeid(),
-        employeeDto.getEmployeename(),
-                employeeDto.getMobilenumber(),
-                employeeDto.getMailid(),
+        employeeDto.getEmployeeId(),
+        employeeDto.getEmployeeName(),
+                employeeDto.getMobileNumber(),
+                employeeDto.getMailId(),
                 employeeDto.getAge(),
                 employeeDto.getSalary(),
-        employeeDto.getPfnumber()
+        employeeDto.getPfNumber()
         );
         return employee;
     }
+
 
 
 }

@@ -1,59 +1,76 @@
 package com.project.SpringProject.Dto;
 
 
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
+
 public class EmployeeDto
 {
-    private int employeeid;
-    private String employeename;
-    private String mobilenumber;
-    private String mailid;
-    private int age;
-    private int salary;
-    private int pfnumber;
 
-    public EmployeeDto(int employeeid, String employeename, String mobilenumber, String mailid, int age, int salary, int pfnumber) {
-        this.employeeid = employeeid;
-        this.employeename = employeename;
-        this.mobilenumber = mobilenumber;
-        this.mailid = mailid;
+    @Id
+    private int employeeId;
+
+    @NotBlank(message = "employee name should not blank")
+    private String employeeName;
+    @Pattern(regexp = "\\d{10}", message ="mobible no should have in 10 digits")
+    private String mobileNumber;
+
+    @NotBlank(message=" email id should not be blank")
+    @Email
+    @Size(max = 100, message = "user mailid should have at least 10 characters")
+    private String mailId;
+
+    @Positive
+    private int age;
+
+    @Positive(message = "salary should be positive")
+    private int salary;
+    @Positive(message  ="pf number should be positive")
+    private int pfNumber;
+
+    public EmployeeDto(int employeeId, String employeeName, String mobileNumber, String mailId, int age, int salary, int pfNumber) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.mobileNumber = mobileNumber;
+        this.mailId = mailId;
         this.age = age;
         this.salary = salary;
-        this.pfnumber = pfnumber;
+        this.pfNumber = pfNumber;
     }
 
     public EmployeeDto() {
     }
 
-    public int getEmployeeid() {
-        return employeeid;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployeeid(int employeeid) {
-        this.employeeid = employeeid;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String getEmployeename() {
-        return employeename;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setEmployeename(String employeename) {
-        this.employeename = employeename;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
-    public String getMobilenumber() {
-        return mobilenumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setMobilenumber(String mobilenumber) {
-        this.mobilenumber = mobilenumber;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
-    public String getMailid() {
-        return mailid;
+    public String getMailId() {
+        return mailId;
     }
 
-    public void setMailid(String mailid) {
-        this.mailid = mailid;
+    public void setMailId(String mailId) {
+        this.mailId = mailId;
     }
 
     public int getAge() {
@@ -72,11 +89,11 @@ public class EmployeeDto
         this.salary = salary;
     }
 
-    public int getPfnumber() {
-        return pfnumber;
+    public int getPfNumber() {
+        return pfNumber;
     }
 
-    public void setPfnumber(int pfnumber) {
-        this.pfnumber = pfnumber;
+    public void setPfNumber(int pfNumber) {
+        this.pfNumber = pfNumber;
     }
 }

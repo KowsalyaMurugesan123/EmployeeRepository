@@ -4,6 +4,7 @@ package com.project.SpringProject.Service.impl;
 import com.project.SpringProject.Dto.EmployeeDto;
 import com.project.SpringProject.EmployeeRepo.EmployeeRepository;
 import com.project.SpringProject.ExceptionHandling.ResourceNotFoundException;
+import com.project.SpringProject.ExceptionHandling.ValidationException;
 import com.project.SpringProject.Mapper.Mapper;
 import com.project.SpringProject.Service.EmployeeService;
 import com.project.SpringProject.entity.Employee;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +27,13 @@ public class EmployeeServiceImpl implements EmployeeService
     @Override
     public EmployeeDto addEmployee(EmployeeDto employeeDto)
     {
+        if (employeeRepository.existsByMailId(employeeDto.getMailId()))
+        {
+            throw new ValidationException("Invalid email format");
+        }
+        if(employeeRepository.existsByMobileNumber(employeeDto.getMobileNumber())){
+            throw new ValidationException("Invalid mobile number");
+        }
         Employee employee = Mapper.mapToEmployee(employeeDto);
         Employee save = employeeRepository.save(employee);
         return Mapper.mapToEmployeeDTO(save);
@@ -34,22 +43,19 @@ public class EmployeeServiceImpl implements EmployeeService
 
         employeeRepository.deleteById(id);
     }
-
-
-
     @Override
     public EmployeeDto updateEmployee(int id, EmployeeDto updateRequest) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee id not Found"));
 
         Employee emp = Mapper.mapToEmployee(updateRequest);
-        emp.setEmployeeid(employee.getEmployeeid());
-        emp.setEmployeename(updateRequest.getEmployeename());
-        emp.setMobilenumber(updateRequest.getMobilenumber());
-        emp.setMailid(updateRequest.getMailid());
+        emp.setEmployeeId(employee.getEmployeeId());
+        emp.setEmployeeName(updateRequest.getEmployeeName());
+        emp.setMobileNumber(updateRequest.getMobileNumber());
+        emp.setMailId(updateRequest.getMailId());
         emp.setAge(updateRequest.getAge());
         emp.setSalary(updateRequest.getSalary());
-        emp.setPfnumber(updateRequest.getPfnumber()
+        emp.setPfNumber(updateRequest.getPfNumber()
         );
         Employee save = employeeRepository.save(emp);
         return Mapper.mapToEmployeeDTO(save);
@@ -75,12 +81,15 @@ public class EmployeeServiceImpl implements EmployeeService
         );
        return Mapper.mapToEmployeeDTO(employee);
     }
+
     @Override
-    public Page findPaginated() {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return this.employeeRepository.findAll(pageable);
-    }
+    public Page<EmployeeDto> getAllEmployee(int pageNo, int pageSize,String sortBy, String sorting){
+        Sort sort= sorting.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
+        Page<Employee> employeePage = employeeRepository.findAll(pageable);
+        Page  pagination = employeePage.map(employee -> Mapper.mapToEmployeeDTO(employee));
+        return pagination;
 
+   }
 
-
-    }
+}
