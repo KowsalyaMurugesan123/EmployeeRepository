@@ -1,15 +1,13 @@
 package com.project.SpringProject.entity;
 
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
 
 @Entity
-@Table(name = "Employee")
+@Table(name = "employee")
 
 public class Employee {
     @Id
@@ -19,19 +17,14 @@ public class Employee {
     @Column(name = "employee_Name")
     private String employeeName;
     @Column(name = "mobile_Number")
-
     private String mobileNumber;
     @Column(name = "mail_Id")
-
     private String mailId;
     @Column(name = "age")
-
     private int age;
     @Column(name = "salary")
-
     private int salary;
     @Column(name = "pf_Number")
-
     private int pfNumber;
 
     public Employee(int employeeId, String employeeName, String mobileNumber, String mailId, int age, int salary, int pfNumber) {

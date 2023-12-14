@@ -25,8 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService
     @Autowired
     private EmployeeRepository employeeRepository;
     @Override
-    public EmployeeDto addEmployee(EmployeeDto employeeDto)
-    {
+    public EmployeeDto addEmployee(EmployeeDto employeeDto) throws ValidationException {
         if (employeeRepository.existsByMailId(employeeDto.getMailId()))
         {
             throw new ValidationException("Invalid email format");

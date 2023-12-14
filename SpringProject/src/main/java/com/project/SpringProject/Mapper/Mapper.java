@@ -19,13 +19,13 @@ public class Mapper {
     }
     public static Employee mapToEmployee(EmployeeDto employeeDto){
         Employee employee = new Employee(
-        employeeDto.getEmployeeId(),
-        employeeDto.getEmployeeName(),
+                employeeDto.getEmployeeId(),
+                employeeDto.getEmployeeName(),
                 employeeDto.getMobileNumber(),
                 employeeDto.getMailId(),
                 employeeDto.getAge(),
                 employeeDto.getSalary(),
-        employeeDto.getPfNumber()
+                employeeDto.getPfNumber()
         );
         return employee;
     }

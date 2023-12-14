@@ -1,28 +1,32 @@
 package com.project.SpringProject.Dto;
 
 
+
+
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 
+
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class EmployeeDto
 {
-
     @Id
     private int employeeId;
 
     @NotBlank(message = "employee name should not blank")
+    @Size(min = 2,max =50,message = "name should be min 2 charachters")
     private String employeeName;
     @Pattern(regexp = "\\d{10}", message ="mobible no should have in 10 digits")
     private String mobileNumber;
 
     @NotBlank(message=" email id should not be blank")
-    @Email
-    @Size(max = 100, message = "user mailid should have at least 10 characters")
+    @Email(message="email invalid format")
+    @Size( min=15,max = 30,message ="user mailid should have more than 15 characters")
     private String mailId;
-
     @Positive
     private int age;
-
     @Positive(message = "salary should be positive")
     private int salary;
     @Positive(message  ="pf number should be positive")

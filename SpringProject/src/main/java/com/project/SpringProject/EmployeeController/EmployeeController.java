@@ -2,6 +2,7 @@ package com.project.SpringProject.EmployeeController;
 
 
 import com.project.SpringProject.Dto.EmployeeDto;
+import com.project.SpringProject.ExceptionHandling.ValidationException;
 import com.project.SpringProject.Mapper.Mapper;
 import com.project.SpringProject.Service.EmployeeService;
 import com.project.SpringProject.entity.Employee;
@@ -11,11 +12,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @RestController
@@ -28,8 +28,7 @@ public class EmployeeController {
 
     // build create User REST API
     @PostMapping(path = "/Save")
-    public ResponseEntity<EmployeeDto> saveEmployee(@Valid @RequestBody EmployeeDto employeeDto)
-    {
+    public ResponseEntity<EmployeeDto> saveEmployee(@Valid @RequestBody EmployeeDto employeeDto) throws ValidationException {
 
         EmployeeDto savedemploye = employeeService.addEmployee(employeeDto);
         return new ResponseEntity<>(savedemploye, HttpStatus.CREATED);
